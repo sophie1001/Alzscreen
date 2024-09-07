@@ -8,4 +8,4 @@ if audio_file:
     # Save the uploaded file
     with open(AUDIO_FILE_NAME, "wb") as f:
         f.write(audio_file.getbuffer())
-        st.toast("Audio Reading Successful", icon = "")
+        st.toast("Audio Reading Successful", icon = "✔")
