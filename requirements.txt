@@ -1,2 +1,2 @@
-librosa==0.10.2.post1
+librosa
 matplotlib==3.9.2
