@@ -5,6 +5,7 @@ import numpy as np
 import requests
 import base64
 import streamlit as st
+IMAGE_NAME = "spectogram.png"
 
 # Function to convert the audio waveform to spectrogram
 def audio_to_spectrogram(audio_file_path: str):
