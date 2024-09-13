@@ -1,4 +1,5 @@
 from utils import audio_to_spectrogram, IMAGE_NAME
+import streamlit as st
 
 AUDIO_FILE_NAME = "uploaded_audio.wav"
 st.title('Alzscreen')
