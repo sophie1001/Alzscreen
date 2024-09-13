@@ -35,6 +35,6 @@ def audio_to_spectrogram(y, sr):
     plt.savefig("test.png")
     plt.show()
     
-y, sr = librosa.load(audio_path)
+y, sr = librosa.load(AUDIO_FILE_NAME)
 audio_to_spectrogram(y, sr)
 spectrogram = "test.png"
