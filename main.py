@@ -1,3 +1,10 @@
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+import numpy as np
+import requests
+import base64
+
 import streamlit as st
 AUDIO_FILE_NAME = "uploaded_audio.wav"
 st.title('Alzscreen')
