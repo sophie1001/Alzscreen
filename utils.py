@@ -7,6 +7,7 @@ import base64
 import streamlit as st
 IMAGE_NAME = "spectogram.png"
 MAIN_LABELS = ["Alzheimer's Disease", "Cognitive Normal"]
+URL = "https://askai.aiclub.world/8badc90c-cbba-456c-aaf2-a1593c356f9b"
 
 # Function to convert the audio waveform to spectrogram
 def audio_to_spectrogram(audio_file_path: str):
