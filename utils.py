@@ -6,6 +6,7 @@ import requests
 import base64
 import streamlit as st
 IMAGE_NAME = "spectogram.png"
+MAIN_LABELS = ["Alzheimer's Disease", "Cognitive Normal"]
 
 # Function to convert the audio waveform to spectrogram
 def audio_to_spectrogram(audio_file_path: str):
@@ -27,3 +28,16 @@ def audio_to_spectrogram(audio_file_path: str):
     except Exception as error:
         print(str(error))
         return False
+        
+def image_to_convert(image_path:str):
+    with open(image_path, "rb") as image:
+        payload = base64.b64encode(image.read())
+        return payload
+
+def get_prediction(image_data):
+    r = requests.post(URL, data=image_data)
+    response = r.json()['predicted_label']
+    # ['predicted_label']
+    print(response)
+    label = MAIN_LABELS[int(response)]
+    return label

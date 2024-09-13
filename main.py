@@ -1,4 +1,4 @@
-from utils import audio_to_spectrogram, IMAGE_NAME
+from utils import audio_to_spectrogram, IMAGE_NAME, image_to_convert, get_prediction
 import streamlit as st
 
 AUDIO_FILE_NAME = "uploaded_audio.wav"
@@ -28,3 +28,7 @@ if audio_file:
             st.header("Generated Spectrogram")
             st.image(IMAGE_NAME)
     
+        base64_string = image_to_convert(IMAGE_NAME)
+        predicted_label = get_prediction(base64_string)
+        print(predicted_label)
+        st.subheader("Condition: {}".format(predicted_label))
