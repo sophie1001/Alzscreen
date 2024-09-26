@@ -2,6 +2,13 @@ from utils import audio_to_spectrogram, image_to_convert, get_prediction
 import streamlit as st
 from utils import IMAGE_NAME
 
+AUDIO_FILE_NAME = "uploaded_audio.wav"
+st.title('Alzscreen')
+# upload the audio file
+# Initialize session state for storing history
+if 'history' not in st.session_state:
+    st.session_state.history = []
+
 # Define usernames and passwords
 user_data = {
     "sophie": "12345",
@@ -32,37 +39,46 @@ def login_page():
 
 # Create a main app function
 def main_app():
-    AUDIO_FILE_NAME = "uploaded_audio.wav"
-    st.title('Alzscreen')
-    # upload the audio file
-    audio_file = st.file_uploader("Upload an audio file", type = ["wav", "mp3"], help = "Upload the audio file of the patient.")
-    if audio_file:
-        # Save the uploaded file
-        with open(AUDIO_FILE_NAME, "wb") as f:
-            f.write(audio_file.getbuffer())
-            st.toast("Audio Reading Successful", icon = "✔")
+  audio_file = st.file_uploader("Upload an audio file", type = ["wav", "mp3"], help = "Upload the audio file of the patient.")
+  if audio_file:
+    # Save the uploaded file
+    with open(AUDIO_FILE_NAME, "wb") as f:
+        f.write(audio_file.getbuffer())
+        st.toast("Audio Reading Successful", icon = "✔")
 
-        # generate the spectorgram
-        spec_results = audio_to_spectrogram(AUDIO_FILE_NAME)
-        if not spec_results:
-            st.error("Spectrogram Saving Failed", icon = "X")
-        else:
-            st.toast("Spectrogram Saving Successful", icon = "✔")
-            # display the audio and spectorgram
-            with st.sidebar:
-                st.title("Alzheimer's Detection")
-                # display the audio
-                st.header("Uploaded Audio")
-                st.audio(AUDIO_FILE_NAME)
-                # display the spectorgram
-                st.header("Generated Spectrogram")
-                st.image(IMAGE_NAME)
+    # generate the spectorgram
+    spec_results = audio_to_spectrogram(AUDIO_FILE_NAME)
+    if not spec_results:
+        st.error("Spectrogram Saving Failed", icon = "X")
+    else:
+        st.toast("Spectrogram Saving Successful", icon = "✔")
+        # display the audio and spectorgram
+        with st.sidebar:
+            st.title("Alzheimer's Detection")
+            # display the audio
+            st.header("Uploaded Audio")
+            st.audio(AUDIO_FILE_NAME)
+            # display the spectorgram
+            st.header("Generated Spectrogram")
+            st.image(IMAGE_NAME)
 
-            base64_string = image_to_convert(IMAGE_NAME)
-            predicted_label = get_prediction(base64_string)
-            print(predicted_label)
-            st.subheader("Condition: {}".format(predicted_label))
+        base64_string = image_to_convert(IMAGE_NAME)
+        predicted_label = get_prediction(base64_string)
+        print(predicted_label)
 
+                # Save the current spectrogram and prediction in session state history
+        st.session_state.history.append((IMAGE_NAME, predicted_label))
+
+        # Limit the history to the last two entries
+        if len(st.session_state.history) > 2:
+            st.session_state.history = st.session_state.history[-2:]
+
+        st.subheader("Condition: {}".format(predicted_label))
+        # Display the history of spectrograms and predictions
+        st.header("Prediction History")
+        for idx, (spec_image, label) in enumerate(reversed(st.session_state.history)):
+            st.subheader(f"Prediction {idx+1}")
+            st.image(spec_image, caption=f"Condition: {label}")
 # Main Streamlit app flow
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
