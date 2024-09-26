@@ -7,7 +7,37 @@ st.title('Alzscreen')
 # upload the audio file
 audio_file = st.file_uploader("Upload an audio file", type = ["wav", "mp3"], help = "Upload the audio file of the patient.")
 
-if audio_file:
+# Define usernames and passwords
+user_data = {
+    "sophie": "12345",
+    "user2": "password2",
+    "admin": "adminpass"
+}
+
+# Create a login function
+def login(username, password):
+    if username in user_data and user_data[username] == password:
+        return True
+    return False
+
+# Streamlit login UI
+def login_page():
+    st.title("Login Page")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    login_button = st.button("Login")
+
+    if login_button:
+        if login(username, password):
+            st.success(f"Welcome {username}!")
+            st.session_state["logged_in"] = True
+            st.session_state["username"] = username
+        else:
+            st.error("Invalid username or password")
+
+# Create a main app function
+def main_app():
+  if audio_file:
     # Save the uploaded file
     with open(AUDIO_FILE_NAME, "wb") as f:
         f.write(audio_file.getbuffer())
@@ -28,8 +58,17 @@ if audio_file:
             # display the spectorgram
             st.header("Generated Spectrogram")
             st.image(IMAGE_NAME)
-    
+
         base64_string = image_to_convert(IMAGE_NAME)
         predicted_label = get_prediction(base64_string)
         print(predicted_label)
         st.subheader("Condition: {}".format(predicted_label))
+
+# Main Streamlit app flow
+if "logged_in" not in st.session_state:
+    st.session_state["logged_in"] = False
+
+if st.session_state["logged_in"]:
+    main_app()
+else:
+    login_page()
