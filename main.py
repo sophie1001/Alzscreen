@@ -8,7 +8,7 @@ st.title('Alzscreen')
 # Initialize session state for storing history
 if 'history' not in st.session_state:
     st.session_state.history = []
-
+i=0
 # Define usernames and passwords
 user_data = {
     "sophie": "12345",
@@ -67,6 +67,7 @@ def main_app():
         print(predicted_label)
 
                 # Save the current spectrogram and prediction in session state history
+        new_name = IMAGE_NAME.split('.')[0] + str(i+1) + ".png"
         st.session_state.history.append((IMAGE_NAME, predicted_label))
 
         # Limit the history to the last two entries
@@ -74,11 +75,15 @@ def main_app():
             st.session_state.history = st.session_state.history[-2:]
 
         st.subheader("Condition: {}".format(predicted_label))
-        # Display the history of spectrograms and predictions
+       # Display the history of spectrograms and predictions in a single row
         st.header("Prediction History")
-        for idx, (spec_image, label) in enumerate(reversed(st.session_state.history)):
-            st.subheader(f"Prediction {idx+1}")
-            st.image(spec_image, caption=f"Condition: {label}")
+        if st.session_state.history:
+            # Create two columns for displaying history side by side
+            cols = st.columns(len(st.session_state.history))
+            for idx, (spec_image, label) in enumerate(st.session_state.history):
+                with cols[idx]:
+                    st.image(spec_image, caption=f"Prediction {idx+1}")
+                    st.text(f"Condition: {label}")
 # Main Streamlit app flow
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
