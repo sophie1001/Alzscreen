@@ -68,7 +68,7 @@ def main_app():
 
                 # Save the current spectrogram and prediction in session state history
         new_name = IMAGE_NAME.split('.')[0] + str(st.session_state.i+1) + ".png"
-        st.session_state.history.append((IMAGE_NAME, predicted_label))
+        st.session_state.history.append((new_name, predicted_label))
 
         # Limit the history to the last two entries
         if len(st.session_state.history) > 2:
