@@ -8,7 +8,7 @@ st.title('Alzscreen')
 # Initialize session state for storing history
 if 'history' not in st.session_state:
     st.session_state.history = []
-i=0
+st.session_state.i = 0
 # Define usernames and passwords
 user_data = {
     "sophie": "12345",
@@ -67,7 +67,7 @@ def main_app():
         print(predicted_label)
 
                 # Save the current spectrogram and prediction in session state history
-        new_name = IMAGE_NAME.split('.')[0] + str(i+1) + ".png"
+        new_name = IMAGE_NAME.split('.')[0] + str(st.session_state.i+1) + ".png"
         st.session_state.history.append((IMAGE_NAME, predicted_label))
 
         # Limit the history to the last two entries
