@@ -37,7 +37,7 @@ def login(username, password):
 
 # Streamlit login UI
 def login_page():
-    st.markdown("<h2 style='text-align: center;'>Login</h2>", unsafe_allow_html=True)st.title("Login Page")
+    st.markdown("<h2 style='text-align: center;'>Login</h2>", unsafe_allow_html=True)
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
