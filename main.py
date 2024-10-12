@@ -33,7 +33,9 @@ def login(username, password):
 
 # Streamlit login UI
 def login_page():
-    st.image(image, caption='logo', width=300)
+    col1, col2, col3 = st.columns([1, 2, 1]) 
+    with col2:
+        st.image(image, caption='logo', width=300)
     st.title("Login Page")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
@@ -49,8 +51,9 @@ def login_page():
 
 # Main app function to upload, process audio, and display results
 def main_app():
-
-    st.image(image, caption='logo', width=300)
+    col1, col2, col3 = st.columns([1, 2, 1]) 
+    with col2:
+        st.image(image, caption='logo', width=300)
     
     # File uploader to upload an audio file
     audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"], help="Upload the audio file of the patient.")
