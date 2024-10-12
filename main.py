@@ -1,5 +1,6 @@
 from utils import audio_to_spectrogram, image_to_convert, get_prediction
 import streamlit as st
+from PIL import Image
 
 # Constants
 AUDIO_FILE_NAME = "uploaded_audio.wav"
@@ -45,6 +46,11 @@ def login_page():
 
 # Main app function to upload, process audio, and display results
 def main_app():
+    # Display the image from the images 
+    folder image = Image.open('images/my_image.png') 
+
+    # Using relative path 
+    st.image(image, caption='This is my image', use_column_width=True)
     # File uploader to upload an audio file
     audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"], help="Upload the audio file of the patient.")
     
