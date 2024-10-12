@@ -8,7 +8,11 @@ AUDIO_FILE_NAME = "uploaded_audio.wav"
 # # Streamlit App Title
 # st.title('Alzscreen')
 # Streamlit App Title (Center-Aligned)
-st.markdown("<h1 style='text-align: center;'>Alzscreen</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Welcome to Alzscreen!</h1>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns([1, 2, 1]) 
+with col2:
+    st.image(image, caption='logo', width=300)
+
 
 # Initialize session state for storing history
 if 'history' not in st.session_state:
@@ -33,10 +37,7 @@ def login(username, password):
 
 # Streamlit login UI
 def login_page():
-    col1, col2, col3 = st.columns([1, 2, 1]) 
-    with col2:
-        st.image(image, caption='logo', width=300)
-    st.title("Login Page")
+    st.markdown("<h2 style='text-align: center;'>Login</h2>", unsafe_allow_html=True)st.title("Login Page")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     login_button = st.button("Login")
@@ -51,10 +52,15 @@ def login_page():
 
 # Main app function to upload, process audio, and display results
 def main_app():
-    col1, col2, col3 = st.columns([1, 2, 1]) 
-    with col2:
-        st.image(image, caption='logo', width=300)
-    
+    st.markdown("""
+Alzscreen is an app designed to assist in the early detection of Alzheimer’s disease by analyzing speech patterns. Using advanced machine learning, the app uses audio samples to detect potential signs of Alzheimer’s, giving you an easy, non-invasive way to screen for early indicators.
+
+## How to use Alzscreen:
+- **Select an Audio File**: Upload a speech audio file (.wav or .mp3) from yourself or someone else.
+- **Upload Your File**: Click **Upload** to submit your file for analysis.
+- **View Results**: The app will now analyze your file and provide a spectrogram with a prediction.
+- **Save Results**: You can save the results in your account, making it easy to keep track of them for future reference or comparison.
+""")
     # File uploader to upload an audio file
     audio_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"], help="Upload the audio file of the patient.")
     
