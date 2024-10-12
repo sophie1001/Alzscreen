@@ -8,10 +8,10 @@ image = Image.open('ALZSCREEN.png')
 # # Streamlit App Title
 # st.title('Alzscreen')
 # Streamlit App Title (Center-Aligned)
-st.markdown("<h1 style='text-align: center;'>Welcome to Alzscreen!</h1>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 2, 1]) 
 with col2:
     st.image(image, caption='', width=300)
+st.markdown("<h1 style='text-align: center;'>Welcome to Alzscreen!</h1>", unsafe_allow_html=True)
 
 
 # Initialize session state for storing history
@@ -53,7 +53,7 @@ def main_app():
     st.markdown("""
 Alzscreen is an app designed to assist in the early detection of Alzheimer’s disease by analyzing speech patterns. Using advanced machine learning, the app uses audio samples to detect potential signs of Alzheimer’s, giving you an easy, non-invasive way to screen for early indicators.
 
-## How to use Alzscreen:
+### How to use Alzscreen:
 - **Select an Audio File**: Upload a speech audio file (.wav or .mp3) from yourself or someone else.
 - **Upload Your File**: Click **Upload** to submit your file for analysis.
 - **View Results**: The app will now analyze your file and provide a spectrogram with a prediction.
