@@ -11,7 +11,7 @@ image = Image.open('ALZSCREEN.png')
 st.markdown("<h1 style='text-align: center;'>Welcome to Alzscreen!</h1>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 2, 1]) 
 with col2:
-    st.image(image, caption='logo', width=300)
+    st.image(image, caption='', width=300)
 
 
 # Initialize session state for storing history
