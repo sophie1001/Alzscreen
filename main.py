@@ -4,7 +4,7 @@ from PIL import Image
 
 # Constants
 AUDIO_FILE_NAME = "uploaded_audio.wav"
-
+image = Image.open('ALZSCREEN.png') 
 # # Streamlit App Title
 # st.title('Alzscreen')
 # Streamlit App Title (Center-Aligned)
@@ -26,8 +26,6 @@ user_data = {
     "user2": "password2",
     "admin": "adminpass"
 }
-
-image = Image.open('ALZSCREEN.png') 
 
 # Create a login function
 def login(username, password):
