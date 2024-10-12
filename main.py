@@ -46,8 +46,8 @@ def login_page():
 
 # Main app function to upload, process audio, and display results
 def main_app():
-    # Display the image from the images 
-    folder image = Image.open('ALZSCREEN.png') 
+    # Display the image
+    image = Image.open('ALZSCREEN.png') 
 
     # Using relative path 
     st.image(image, caption='logo', use_column_width=True)
